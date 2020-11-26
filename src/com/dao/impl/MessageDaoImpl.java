@@ -12,37 +12,31 @@ import java.util.List;
  * 描述：
  */
 public class MessageDaoImpl extends BaseDao implements MessageDao {
-    @Override
     public int insert(Message message) {
         String sql = "INSERT INTO `message` (`fromUid`, `toUid`, `mTitle`, `mContent`, `isReadFlag`, `createTime`) VALUES (?,?,?,?,?,?)";
         return update(sql, message.getFromUid(), message.getToUid(), message.getmTitle(), message.getmContent(), message.getIsReadFlag(), message.getCreateTime());
     }
 
-    @Override
     public int update(Message message) {
         String sql = "UPDATE `message` SET `fromUid` = ?, `toUid` = ?, `mTitle` = ?, `mContent` = ?, `isReadFlag` = ?, `createTime` = ?  WHERE `id` = ?";
         return update(sql, message.getFromUid(), message.getToUid(), message.getmTitle(), message.getmContent(), message.getIsReadFlag(), message.getCreateTime(),message.getId());
     }
 
-    @Override
     public int delete(Integer id) {
         String sql = "DELETE FROM `message` WHERE `id` = ?";
         return update(sql,id);
     }
 
-    @Override
     public List<Message> queryAll() {
         String sql = "SELECT * FROM `message`";
         return queryForList(Message.class,sql);
     }
 
-    @Override
     public Message queryMessageById(Integer id) {
         String sql = "SELECT * FROM `message` WHERE `id` = ?";
         return queryForOne(Message.class,sql,id);
     }
 
-    @Override
     public List<Message> queryMessageByToUid(Integer id) {
         String sql = "SELECT * FROM `message` WHERE `toUid` = ?";
         return queryForList(Message.class,sql,id);
